@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
   String dayKey = '';
   double maxTemp = 0.0;
   double minTemp = 0.0;
-  dynamic isSelected = [];
+  int  isSelected = -1;
   List<Map<String, dynamic>> hourlyData = [];
 
   double _longitude = 0.0;
@@ -65,7 +65,6 @@ class _HomePageState extends State<HomePage> {
 
         final todayData = []; // Initialize with empty list
         setState(() {
-          isSelected = List.generate(todayData.length, (index) => false);
           _weatherBloc.add(FetchWeatherEvent(latitude: _longitude, longitude: _latitude));
         });
       });
@@ -193,14 +192,6 @@ class _HomePageState extends State<HomePage> {
                 24,
               );
 
-              List<bool> isSelected = List.generate(todayData.length, (index) => false);
-              void handleItemClick(int index) {
-                setState(() {
-                  for (int i = 0; i < isSelected.length; i++) {
-                    isSelected[i] = (i == index);
-                  }
-                });
-              }
 
               if (todayData.isEmpty) {
                 return Center(
@@ -428,7 +419,7 @@ class _HomePageState extends State<HomePage> {
                                       currentTemperature=temperature;
                                       currenthuyimidty=huyimidity.toDouble();
                                       currentwind=wind;
-                                      isSelected[index] = !isSelected[index]; // Toggle selection
+                                      isSelected =index; // Toggle selection
                                       print("isSelected: $isSelected"); // Debug print
                                     });
                                   },
@@ -436,7 +427,11 @@ class _HomePageState extends State<HomePage> {
                                     width: 100, // Specify the width for each item
                                     margin: EdgeInsets.symmetric(horizontal: 4), // Add margin for spacing between items
                                     decoration: BoxDecoration(
-                                      color: isSelected[index] ? Colors.blue : Colors.white60, // Change the color based on isSelected
+                                      border: Border.all(
+                                        width: 2,
+                                        color: Colors.white60
+                                      ),
+                                      color: isSelected==index ? Colors.blue : Colors.transparent, // Change the color based on isSelected
                                       borderRadius: BorderRadius.circular(20),
                                     ),
                                     child: Column(

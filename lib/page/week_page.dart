@@ -304,14 +304,7 @@ class _WeekPageState extends State<WeekPage> {
 
                         return GestureDetector(
                           onTap:(){
-                            // Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage())).then((value){
-                            //   if(value !=null){
-                            //     dayKey: dayKey;
-                            //   maxTemp: dailyMinMaxTemperatures[dayKey]!['max']!;
-                            //   minTemp: dailyMinMaxTemperatures[dayKey]!['min']!;
-                            //   // Pass hourly temperature data here
-                            //   }
-                            // });
+
                           }
                                                    ,
                           child: Padding(
